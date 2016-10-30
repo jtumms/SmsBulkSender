@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form action="/addpost" method="post" id="post">
+    <input type="text" placeholder="Subject or Summary goes here" name="subject"/><br>
+    <textarea name="content" rows="10" cols="50" placeholder="Enter content here"></textarea><br>
+    <button type="submit">Submit Post</button>
+</form>
+
+
+<br>
+
+<form action="/logout" method="post" id="logout">
+    <button type="submit">Logout</button>
+</form>
+
+<br>
+<div>
+    <h1>All Posts</h1>
+<div class="container">
+    <div class="wrapper">
+    <div class="buttonH">
+        {{#showPrev}}
+
+        <a href="/home?page={{prevPage}}"><button>Prev</button></a>
+
+        {{/showPrev}}
+
+        {{#showNext}}
+        <a href="/home?page={{nextPage}}"><button>Next</button></a>
+
+        {{/showNext}}
+
+        </div>
+        </div>
+    </div>
+    <br>
+    <div>
+<table>
+    <tr>
+        <th>Post Author</th>
+        <th>Subject</th>
+        <th>Content(Partial)</th>
+    </tr>
+    {{#posts}}
+    <tr>
+        <td>{{#user}}{{name}}{{/user}}</td>
+        <td>{{subject}}</td>
+        <td>{{content}}</td>
+    </tr>
+    {{/posts}}
+</table>
+</div>
+<!--<script src="/js/jquery-3.1.1.js"></script>-->
+<!--<script src="/js/main.js"></script>-->
+
+
+</body>
+</html>
