@@ -150,5 +150,28 @@ public class SmsBulkSenderController {
         user = null;
         return "redirect:/";
     }
+    @RequestMapping(path = "/delete-post", method = RequestMethod.POST)
+    public String delete(HttpSession session, User user, int id) throws Exception {
+        if (!validateUser(session)){
+            throw new Exception("Not allowed...Not a valid user!");
+        }
+        posts.delete(id);
+        return "home";
+    }
+    @RequestMapping(path = "/resend-post", method = RequestMethod.POST)
+    public String resend(HttpSession session, User user, int id) throws Exception {
+        if (!validateUser(session)){
+            throw new Exception("Not allowed...Not a valid user!");
+        }
+        Post post = posts.findOne(id);
+        post.setSent(false);
+        posts.save(post);
+        return "redirect:/home";
+    }
+    public boolean validateUser(HttpSession session) {
+        String name = (String) session.getAttribute("username");
+        User user = users.findFirstByName(name);
+        return user != null && user.name != null;
+    }
 
 }

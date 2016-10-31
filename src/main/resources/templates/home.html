@@ -64,12 +64,26 @@ tr:nth-child(even) {
         <th>Post Author</th>
         <th>Subject</th>
         <th>Content(Partial)</th>
+        <th>Delete</th>
+        <th>Resend Text Message</th>
     </tr>
     {{#posts}}
     <tr>
         <td>{{#user}}{{name}}{{/user}}</td>
         <td>{{subject}}</td>
         <td>{{content}}</td>
+        <td>
+            <form action="/delete-post" method="post">
+                <input type="hidden" value="{{id}}" name="id"/>
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+        <td>
+            <form action="/resend-post" method="post">
+                <input type="hidden" value="{{id}}" name="id"/>
+                <button type="submit">Resend Txt Message</button>
+            </form>
+        </td>
 
     </tr>
     {{/posts}}
