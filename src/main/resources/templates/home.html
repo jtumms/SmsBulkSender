@@ -19,9 +19,10 @@ tr:nth-child(even) {
 </style>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Alert/Post Dashboard</title>
 </head>
 <body>
+<h1>Add Post</h1>
 
 <form action="/addpost" method="post" id="post">
     <input type="text" placeholder="Subject or Summary goes here" name="subject"/><br>
@@ -69,6 +70,7 @@ tr:nth-child(even) {
         <td>{{#user}}{{name}}{{/user}}</td>
         <td>{{subject}}</td>
         <td>{{content}}</td>
+
     </tr>
     {{/posts}}
 </table>

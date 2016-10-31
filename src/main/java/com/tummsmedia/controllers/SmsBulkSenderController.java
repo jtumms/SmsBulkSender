@@ -28,7 +28,7 @@ import java.util.List;
  */
 @Controller
 public class SmsBulkSenderController {
-    // Find your Account Sid and Token at twilio.com/user/account
+    // Account Sid and Token at twilio.com/user/account
     public static final String ACCOUNT_SID = "ACdcf4e767d4ebe5e1ac57bff838a2557f";
     public static final String AUTH_TOKEN = "83051e053feeb53cd130dcf11ff3a6a0";
 
@@ -58,7 +58,7 @@ public class SmsBulkSenderController {
                     if (postList != null) {
                         for (User user : userList) {
                             for (Post post : postList) {
-                                String msgText = String.format("Subject: %s \n Post: %s", post.subject, post.content);
+                                String msgText = String.format("Subject: %s\nPost: %s", post.subject, post.content);
                                 Message message = Message
                                         .creator(new PhoneNumber("+1" + user.phone), new PhoneNumber("+15162523511"),
                                                 msgText)
@@ -69,23 +69,18 @@ public class SmsBulkSenderController {
                                 System.out.println(message.getSid());
                             }
                         }
-
                     }
-
                     try {
                         Thread.sleep(60000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-
-
-                }   }
+                }
+            }
         });
+        //Start sms thread here. Set to check db every 60 seconds
         smsThread.start();
     }
-
-
-
     @PreDestroy
     public void destroy() {
         h2Server.stop();
@@ -148,6 +143,12 @@ public class SmsBulkSenderController {
         model.addAttribute("showPrev", postList.hasPrevious());
 
         return "home";
+    }
+    @RequestMapping(path = "/logout", method = RequestMethod.POST)
+    public String logout(HttpSession session, User user) {
+        session.invalidate();
+        user = null;
+        return "redirect:/";
     }
 
 }
