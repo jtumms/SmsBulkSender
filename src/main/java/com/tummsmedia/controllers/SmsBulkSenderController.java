@@ -71,7 +71,7 @@ public class SmsBulkSenderController {
                         }
                     }
                     try {
-                        Thread.sleep(60000);
+                        Thread.sleep(15000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
