@@ -132,7 +132,7 @@ public class SmsBulkSenderController {
     @RequestMapping(path = "/home", method = RequestMethod.GET)
     public String home (Model model, Integer page){
         page = (page == null) ? 0 : page;
-        PageRequest pr = new PageRequest(page, 10);
+        PageRequest pr = new PageRequest(page, 5);
         Page<Post> postList;
         postList = posts.findAll(pr);
 
